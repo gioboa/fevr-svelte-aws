@@ -1,4 +1,5 @@
 import { writable, get } from 'svelte/store';
+import Auth from '@aws-amplify/auth';
 
 export const MODE = Object.freeze({
   SIGN_IN: 0,
@@ -26,12 +27,18 @@ const myStore = () => {
     goToSignIn: () => set({ ...get(store), mode: MODE.SIGN_IN }),
     goToSignUp: () => set({ ...get(store), mode: MODE.SIGN_UP }),
     signIn: ({ username, password }) =>
-      set({ ...get(store), username, mode: MODE.LOGGED }),
+      Auth.signIn(username, password).then((data) => {
+        set({ ...get(store), username, mode: MODE.LOGGED });
+      }),
     signUp: ({ username, password, email }) =>
-      set({ ...get(store), username, mode: MODE.CONFIRM }),
+      Auth.signUp({ username, password, attributes: { email } }).then(
+        set({ ...get(store), username, mode: MODE.CONFIRM })
+      ),
     confirm: (confirmCode) => {
-      console.log('confirmCode: ', confirmCode);
-      set({ ...get(store), mode: MODE.LOGGED });
+      Auth.confirmSignUp(get(store).username, confirmCode).then((data) => {
+        console.log('confirmCode: ', confirmCode);
+        set({ ...get(store), mode: MODE.LOGGED });
+      });
     },
     add: (name, title) =>
       set({

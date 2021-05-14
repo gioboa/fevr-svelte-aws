@@ -1,0 +1,4 @@
+amplify init
+amplify add auth
+amplify push
+npm i @aws-amplify/auth
