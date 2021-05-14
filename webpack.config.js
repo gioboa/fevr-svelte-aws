@@ -46,6 +46,12 @@ module.exports = {
           fullySpecified: false,
         },
       },
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+      },
     ],
   },
   mode,

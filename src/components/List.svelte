@@ -2,6 +2,13 @@
   import Item from './item/Item.svelte';
   import AddItem from './item/AddItem.svelte';
   import store from '../store';
+  import { onMount, onDestroy } from 'svelte';
+  import { Person } from '../models';
+  import { DataStore } from '@aws-amplify/datastore';
+
+  onMount(store.updateList);
+  const subscription = DataStore.observe(Person).subscribe(store.updateList);
+  onDestroy(subscription.unsubscribe);
 </script>
 
 <h2>My List</h2>

@@ -1,0 +1,8 @@
+{
+    "CreateAPIKey": 1,
+    "AppSyncApiName": "fevrsvelteaws",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "DynamoDBEnableServerSideEncryption": false,
+    "S3DeploymentBucket": "amplify-fevrsvelteaws-dev-143641-deployment",
+    "S3DeploymentRootKey": "amplify-appsync-files/d878877c82159bebe3bf150e37ab37e6661f7392"
+}

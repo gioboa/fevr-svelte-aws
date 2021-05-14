@@ -16,6 +16,7 @@
     "dev": "webpack serve --content-base public"
   },
   "dependencies": {
-    "@aws-amplify/auth": "^3.4.32"
+    "@aws-amplify/auth": "^3.4.32",
+    "@aws-amplify/datastore": "^3.0.1"
   }
 }

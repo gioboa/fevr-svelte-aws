@@ -1,6 +1,8 @@
 <script>
   import store, { MODE } from '../store';
   import Confirm from './Confirm.svelte';
+  import Spinner from './Spinner.svelte';
+
   let username = '';
   let password = '';
   let email = '';
@@ -12,8 +14,11 @@
 </script>
 
 <section>
-  {#if $store.mode !== MODE.CONFIRM}
+  {#if $store.mode === MODE.SIGN_UP || $store.mode === MODE.SIGN_IN}
     <h2>{$store.mode === MODE.SIGN_UP ? 'Sign up' : 'Sign in'}</h2>
+    {#if !!$store.error}
+      <h4 class="error">{$store.error}</h4>
+    {/if}
     <label>
       <div>Username:</div>
       <input type="text" bind:value={username} placeholder="your username" />
@@ -35,6 +40,9 @@
   {/if}
   {#if $store.mode === MODE.CONFIRM}
     <Confirm />
+  {/if}
+  {#if $store.mode === MODE.LOADING}
+    <Spinner />
   {/if}
 </section>
 
